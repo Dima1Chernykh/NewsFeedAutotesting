@@ -1,6 +1,6 @@
 import com.codeborne.selenide.Condition;
-import org.openqa.selenium.By;
 
+import java.io.File;
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -33,6 +33,9 @@ public class Methods {
         String loginText = loginPage.loginReg.getAttribute("value");
         loginPage.emailReg.sendKeys(generateRandomHexString(5) + "@gmail.com");
         loginPage.passwordReg.sendKeys(generateRandomHexString(6));
+        String avatarPath = "src/main/resources/avatar.jpeg";
+        File file = new File(new File(avatarPath).getAbsolutePath());
+        loginPage.avatarReg.sendKeys(file.getAbsolutePath());
         loginPage.submitRegButton.click();
         headerElements.helloHeader.shouldBe(Condition.visible);
         assertEquals(("Привет, " + loginText + "!"), headerElements.helloHeader.getText());
