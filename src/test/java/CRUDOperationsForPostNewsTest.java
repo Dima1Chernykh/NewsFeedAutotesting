@@ -4,6 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.File;
 
@@ -12,7 +13,6 @@ public class CRUDOperationsForPostNewsTest extends SetUp {
     private final Methods methods = new Methods();
     private final HeaderElements headerElements = new HeaderElements();
     private final AccountElements accountElements = new AccountElements();
-    private final LoginPage loginPage = new LoginPage();
 
     @Epic(value = "User page.")
     @Feature("CRUD new post.")
@@ -30,7 +30,7 @@ public class CRUDOperationsForPostNewsTest extends SetUp {
         String newPostDescriptionText = accountElements.newPostName.getAttribute("value");
         accountElements.newPostTags.sendKeys(methods.generateRandomHexString(10) + " " + methods.generateRandomHexString(10));
         String newPostTagsText = accountElements.newPostName.getAttribute("value");
-        // make relative path to file
+        // make relative-absolute path to file
         String path = "src/main/resources/maxresdefault.jpg";
         File file = new File(new File(path).getAbsolutePath());
         //

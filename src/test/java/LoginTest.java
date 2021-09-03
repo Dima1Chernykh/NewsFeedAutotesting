@@ -5,6 +5,8 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,6 +35,9 @@ public class LoginTest extends SetUp {
         String emailText = loginPage.emailReg.getAttribute("value");
         loginPage.passwordReg.sendKeys(methods.generateRandomHexString(6));
         String passwordText = loginPage.passwordReg.getAttribute("value");
+        String avatarPath = "src/main/resources/avatar.jpeg";
+        File file = new File(new File(avatarPath).getAbsolutePath());
+        loginPage.avatarReg.sendKeys(file.getAbsolutePath());
         loginPage.submitRegButton.click();
         headerElements.helloHeader.shouldBe(Condition.visible);
         assertEquals(("Привет, " + loginText + "!"), headerElements.helloHeader.getText());
